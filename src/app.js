@@ -4,7 +4,13 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-window.onload = function () {
+window.onload = randomCard;
+
+const newCard = document.querySelector("#new-card");
+
+newCard.addEventListener("click", randomCard);
+
+function randomCard() {
   // Funcion que devuelve el valor de la carta
   function randomValor() {
     let valor = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
@@ -26,17 +32,15 @@ window.onload = function () {
   }
 
   // Funcion que devuelve el color del palo
-  function randomColor() {
-    let randomIndex = Math.round(Math.random());
-
-    if (randomIndex == 1) {
+  function randomColor(palo) {
+    if (palo.includes("9829") || palo.includes("9830")) {
       return "red";
     }
     return "black";
   }
 
   const palo = randomPalo();
-  const color = randomColor();
+  const color = randomColor(palo);
   const valor = randomValor();
 
   document.querySelectorAll(".card-header, .card-footer").forEach((element) => {
@@ -44,4 +48,4 @@ window.onload = function () {
     element.innerHTML = palo;
   });
   document.querySelector(".card-body").innerHTML = valor;
-};
+}
